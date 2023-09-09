@@ -31,6 +31,14 @@ function CountryVisualizator() {
             });
     },[])
 
+    const getNativeName = (nativeNames) => {
+        let names = [];
+        for (const name in nativeNames) {
+            names.push(nativeNames[name].official);
+        }
+
+        return names.join(", ")
+    };
 
     return (
         <>
@@ -52,7 +60,7 @@ function CountryVisualizator() {
                             </header>
 
                             <ul className="details">
-                                <li><b>Native Name</b>: </li>
+                                <li><b>Native Name</b>: {getNativeName(country.name.nativeName)}</li>
                                 <li><b></b>: </li>
                                 <li><b></b>: </li>
                                 <li><b></b>: </li>
