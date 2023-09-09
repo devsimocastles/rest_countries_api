@@ -1,0 +1,54 @@
+// PARTIALS IMPORT /////////////////////////////////////
+@import "vars";
+@import "mixins";
+@import "filter_options";
+@import "country_card";
+
+// FONT IMPORT = NUNITO /////////////////////////////////
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;700;800&display=swap");
+
+// CSS RESET ///////////////////////////////////////////
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  background-color: $VeryLightGray;
+  min-height: 100vh;
+  font-family: $fontfam;
+  padding-bottom: 3em;
+
+  .Navbar {
+    @include setFlex(row, center, space-between, nowrap);
+    padding: 2em;
+    box-shadow: $lightShadow;
+    background-color: $White;
+
+    h1.title {
+      font-weight: 800;
+    }
+
+    button.theme_switcher {
+      @include setFlex(row, center, space-between, nowrap);
+      font-family: $fontfam;
+      background-color: transparent;
+      border: none;
+      font-weight: 600;
+      width: 95px;
+
+      .theme_switcher_icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  main {
+    width: 85%;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,48 @@
+.card_container {
+    @include setFlex(row, center, space-around, wrap);
+
+    .country_card {
+      @include setFlex(column, center, space-between, nowrap);
+
+      border-radius: 5px;
+      width: 200px;
+      min-height: 250px;
+      margin: 2em;
+      background-color: white;
+      box-shadow: $lightShadow;
+
+      .flag_container {
+        width: 100%;
+        height: 115px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+
+      .card_content {
+        margin-bottom: 1em;
+        width: 85%;
+        header {
+          margin: .5em 0;
+          h2 {
+            font-size: 18px;
+            margin: 0.5em 0;
+            width: 90%;
+            font-size: 14px;
+          }
+        }
+
+        .country_data {
+          @include setFlex(row, center, flex-start, nowrap);
+          font-size: 13px;
+
+          h4 {
+            display: inline-block;
+            margin-right: 0.5em;
+          }
+        }
+      }
+    }
+  }

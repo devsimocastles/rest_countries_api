@@ -1,0 +1,70 @@
+.filter_options_container {
+  margin: 3em 0;
+
+  form {
+    @include setFlex(row, center, space-between, nowrap);
+    & > * {
+      background-color: $White;
+    }
+
+    .search_input {
+      box-shadow: $lightShadow;
+      padding: 0.8em 2em;
+      border-radius: 5px;
+
+      & > * {
+        color: $DarkGray;
+        font-family: $fontfam;
+      }
+
+      input {
+        border: none;
+        margin-left: 2em;
+        font-weight: 600;
+        background-color: transparent;
+
+        &:focus-within {
+          outline: none;
+        }
+      }
+    }
+
+    .show_all_countries {
+      padding: 0.8em 2em;
+      border: none;
+      background-color: $White;
+      box-shadow: $lightShadow;
+      border-radius: 5px;
+      font-family: $fontfam;
+      font-weight: 600;
+      color: $VeryDarkBlue;
+    }
+
+    .filter_options {
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 0.8em 2em;
+        border: none;
+        outline: none;
+        box-shadow: $lightShadow;
+        color: $VeryDarkBlue;
+        font-weight: 600;
+        font-family: $fontfam;
+        border-radius: 5px;
+        position: relative;
+        option {
+          &:hover {
+            background-color: $VeryLightGray;
+          }
+        }
+
+        &:focus-within,
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+  }
+}
