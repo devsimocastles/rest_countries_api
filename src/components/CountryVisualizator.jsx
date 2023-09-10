@@ -15,6 +15,11 @@ function CountryVisualizator() {
     const { country_name } = useParams();
     const [country, setCountry] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [hasBorders, setHasBorders] = useState(true);
+
+    const countries = require("i18n-iso-countries");
+    countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+
 
 
 
@@ -27,18 +32,37 @@ function CountryVisualizator() {
             })
             .then(countryData => {
                 setCountry(...countryData)
+                console.log(country);
                 setLoading(false);
             });
-    },[])
 
-    const getNativeName = (nativeNames) => {
-        let names = [];
-        for (const name in nativeNames) {
-            names.push(nativeNames[name].official);
+    }, [])
+
+
+    const dataToString = (data, prop) => {
+        let result = [];
+        for (const key in data) {
+            if (prop == "languages") result.push(data[key])
+            else result.push(data[key][prop])
+        }
+        return result.join(", ");
+    }
+
+    const getBordersCountries = (borders) => {
+        console.log(borders);
+        let result = [];
+        if (borders) {
+            for (const country of borders) {
+                result.push(countries.getName(country, "en"))
+            }
+            setHasBorders(true);
+            return result;
+        } else {
+            setHasBorders(false)
         }
 
-        return names.join(", ")
-    };
+    }
+
 
     return (
         <>
@@ -51,28 +75,42 @@ function CountryVisualizator() {
                         (<h1>Loading...</h1>)
                         :
                         (
-                        <article className="country">
-                            <div className="country_img">
-                                <img src={country.flags.svg} alt={country.name.common} />
-                            </div>
-                            <header>
-                                <h2>{country.name.common}</h2>
-                            </header>
+                            <article className="country">
+                                <div className="country_img">
+                                    <img src={country.flags.svg} alt={country.name.common} />
+                                </div>
+                                <header>
+                                    <h2>{country.name.common}</h2>
+                                </header>
 
-                            <ul className="details">
-                                <li><b>Native Name</b>: {getNativeName(country.name.nativeName)}</li>
-                                <li><b></b>: </li>
-                                <li><b></b>: </li>
-                                <li><b></b>: </li>
-                                <li><b></b>: </li>
-                            </ul>
+                                <ul className="details">
+                                    <li><b>Native Name</b>: {dataToString(country.name.nativeName, "official")}</li>
+                                    <li><b>Population</b>: {country.population.toLocaleString()}</li>
+                                    <li><b>Region</b>: {country.region}</li>
+                                    <li><b>Subregion</b>: {country.subregion}</li>
+                                    <li><b>Capital</b>: {country.capital.join(", ")}</li>
+                                </ul>
 
-                            <ul className="details">
-                                <li><b></b>: </li>
-                                <li><b></b>: </li>
-                                <li><b></b>: </li>
-                            </ul>
-                        </article>
+                                <ul className="details">
+                                    <li><b>Top Level Domain</b>: {country.tld[0]}</li>
+                                    <li><b>Currencies</b>: {dataToString(country.currencies, "name")} </li>
+                                    <li><b>Languages</b>: {dataToString(country.languages, "languages")}</li>
+                                </ul>
+
+                                {
+                                country.borders ? 
+                                (
+                                 <>
+                                    {
+                                        getBordersCountries(country.borders)
+                                        .map(c => console.log(c))
+                                    }
+                                 </>
+                                )
+                                :
+                                (<></>)
+                            }
+                            </article>
                         )
                 }
             </div>

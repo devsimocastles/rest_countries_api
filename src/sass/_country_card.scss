@@ -26,11 +26,18 @@
         width: 85%;
         header {
           margin: .5em 0;
-          h2 {
-            font-size: 18px;
-            margin: 0.5em 0;
-            width: 90%;
-            font-size: 14px;
+          a{
+            text-decoration: none;
+            color: $VeryDarkBlue;
+            h2 {
+              font-size: 18px;
+              margin: 0.5em 0;
+              width: 90%;
+              font-size: 14px;
+            }
+            &:hover{
+              text-decoration: underline
+            }
           }
         }
 
