@@ -5,17 +5,22 @@ import { faMoon as MoonDark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { icon } from "@fortawesome/fontawesome-svg-core";
 
-function ThemeSwitcher(){
+function ThemeSwitcher({handleTheme, updateTheme}){
 
-    let [buttonIcon, setButtonIcon] = useState(MoonLight);
+    let [buttonIcon, setButtonIcon] = useState(MoonDark);
 
-    const changeTheme = () => {
+
+    const changeIcon = () => {
         if (buttonIcon == MoonLight) setButtonIcon(MoonDark);
         else setButtonIcon(MoonLight)
     }
 
     return (
-        <button className="theme_switcher" onClick={changeTheme}>
+        <button className="theme_switcher" onClick={() => {
+            handleTheme()
+            updateTheme()
+            changeIcon()
+        }}>
         <FontAwesomeIcon
             icon={buttonIcon} 
             className="theme_switcher_icon"

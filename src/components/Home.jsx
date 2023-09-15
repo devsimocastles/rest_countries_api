@@ -1,24 +1,31 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
+
+import { themeSwitch, updateTheme } from "../utils/themeSwitch.js";
+
 import Navbar from "./Navbar.jsx";
 import Card from "./Card.jsx";
 import SearchBar from "./SearchBar.jsx";
 import NotFound from "./NotFound";
 
 function Home() {
+
     let [countries, setCountries] = useState([]);
     let [isLoading, setIsLoading] = useState(true);
     let [notFound, setNotFound] = useState(false);
+    let [darkTheme, setDarkTheme] = useState(false);
+    let [chosenTheme, setChosenTheme] = useState(localStorage.getItem("darkTheme"));
+
 
     const countryApiUrl = "https://restcountries.com/v3.1/all";
 
+    // FETCH COUNTRIES WHEN PAGE IS LOADING ///////////////////////////////
     useEffect(() => {
         getCountry(countryApiUrl)
     }, []);
 
-
-
+    // FETCH COUNTRIES BY PASSING AN URL ///////////////////////////////
     async function getCountry(url) {
         try {
             setIsLoading(true);
@@ -37,12 +44,12 @@ function Home() {
         }
     }
 
-
+    // FETCH COUNTRIES BY SEARCH TERM ///////////////////////////////
     const onSearchSubmit = term => {
         getCountry(`https://restcountries.com/v3.1/name/${term}`);
     }
 
-
+    // FETCH COUNTRIES BY REGION ///////////////////////////////
     const filterRegion = (e) => {
         if (e.target.value != "Filter by Region") {
             getCountry(`https://restcountries.com/v3.1/region/${e.target.value}`);
@@ -51,7 +58,7 @@ function Home() {
         }
     }
 
-
+    // WHEN COUNTRIES FETCH IS DONE, CREATE A CARD COMPONENT FOR EACH COUNTRY, SORT THEM, AND STORE THEM ALL HERE ///////////////////////////////
     const showCountries = countries.sort((a, b) => a.name.common > b.name.common ? 1 : -1)
         .map((country) =>
         (<Card
@@ -59,8 +66,8 @@ function Home() {
             name={country.name.common}
             population={country.population.toLocaleString()}
             region={country.region}
-            capital={country.capital instanceof Array ?
-                country.capital[0] : country.capital}
+            capital={country.capital ? country.capital instanceof Array ?
+                country.capital[0] : country.capital : "None"}
             key={country.name.common.toLowerCase()}
         />)
         )
@@ -71,8 +78,11 @@ function Home() {
     }
 
     return (
-        <>
-            <Navbar />
+        <div className={chosenTheme == 0 ? "light_theme" : "dark_theme"}>
+            <Navbar 
+            themeSwitcher={() => themeSwitch(darkTheme, setDarkTheme)}
+            updateTheme={() => updateTheme(chosenTheme, setChosenTheme)}
+            />
             <main>
                 <div className="filter_options_container">
                     <form onSubmit={disableReload}>
@@ -101,11 +111,11 @@ function Home() {
                         
                         */
                         notFound ? (<NotFound url={countryApiUrl} defaultSearch={onSearchSubmit} />) :
-                            isLoading ? (<h2>Loading...</h2>) : showCountries
+                            isLoading ? (<h2 className="loading">Loading...</h2>) : showCountries
                     }
                 </div>
             </main>
-        </>
+        </div>
     );
 }
 

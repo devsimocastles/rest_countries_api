@@ -6,7 +6,7 @@
                         $DarkBlue: hsl(209, 23%, 22%);
 
 //=========================== Dark Mode Background ===========================
-                        $VeryDarkBlue: hsl(207, 26%, 17%);
+                        $VeryDarkBlueBG: hsl(207, 26%, 17%);
 
 //=========================== Light Mode Text ===========================
                         $VeryDarkBlue: hsl(200, 15%, 8%);
@@ -21,7 +21,8 @@
                         $White: hsl(0, 0%, 100%);
 
 ///////////////////////////// SHADOWS /////////////////////////////
-                        $lightShadow: 0px 0px 7px hsla(208, 23%, 22%, 0.153);
+                        $lightShadow: 0px 0px 7px hsla(208, 23%, 22%, 0.445);
+                        $darkShadow: 0px 0px 14px hsl(210, 6%, 13%);
 
 ///////////////////////////// TEXT SIZE /////////////////////////////
                         $HomepageItems: 14px;

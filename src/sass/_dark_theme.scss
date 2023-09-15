@@ -1,0 +1,75 @@
+.App {
+  .dark_theme {
+    background-color: $VeryDarkBlueBG;
+    & > *{
+      color: $White;
+    }
+    .Navbar, .country_card{
+      background-color: $DarkBlue;
+    }
+
+      // navbar styles
+    .Navbar{
+      box-shadow: $darkShadow;
+      .theme_switcher, svg path{
+        color: $White;
+      }
+    }
+
+    // filter options styles
+    .filter_options_container{
+      form{
+        .search_input,
+        .filter_options, 
+        .filter_options .filter_region, 
+        .show_all_countries{
+          background-color: $DarkBlue;
+          color: $White;
+          box-shadow: $darkShadow;
+        }
+        .search_input{
+          svg{
+            path{
+              color: $White;
+            }
+          }
+          input, input::placeholder{
+            color: $White;
+          }
+        }
+      }
+    }
+
+    // country card styles
+    .country_card{
+      box-shadow: $darkShadow;
+      .card_content{
+        header{
+          a{
+            color: $White;
+          }
+        }
+      }
+    }
+
+    // country visualizator back button styles
+    .back_button{
+      a{
+        background-color: $DarkBlue;
+        color: $White;
+        box-shadow: $darkShadow;
+      }
+    }
+
+      // country visualizator border countries
+    .border_countries{
+      .links{
+        a{
+          background-color: $DarkBlue;
+          color: $White;
+          box-shadow: $darkShadow;
+        }
+      }
+    }
+  }
+}

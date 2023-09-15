@@ -1,0 +1,11 @@
+
+
+@media screen and (max-width:768px) {
+    .filter_options_container{
+
+        form{
+            height: 200px;
+            @include setFlex(column, space-evenly, space-between, nowrap);
+        }
+    }
+}

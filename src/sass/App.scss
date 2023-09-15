@@ -2,7 +2,11 @@
 @import "vars";
 @import "mixins";
 @import "filter_options";
+@import "filter_options_responsive";
 @import "country_card";
+@import "country_visualizator";
+@import "country_visualizator_responsive";
+@import "dark_theme";
 
 // FONT IMPORT = NUNITO /////////////////////////////////
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;700;800&display=swap");
@@ -17,10 +21,26 @@
 }
 
 .App {
-  background-color: $VeryLightGray;
   min-height: 100vh;
   font-family: $fontfam;
-  padding-bottom: 3em;
+
+  & > *{
+    transition: .1s ease-in-out all;
+  }
+
+  .loading{
+    text-align: center;
+    width: 100%;
+  }
+
+
+  .light_theme, .dark_theme{
+    min-height: 100vh;
+  }
+
+  .light_theme{
+    background-color: $White;
+  }
 
   .Navbar {
     @include setFlex(row, center, space-between, nowrap);
